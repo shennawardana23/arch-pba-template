@@ -73,8 +73,8 @@ A quick look at the top-level files and directories you'll see in this project.
 ```
     .
     ├── cmd
-    ├── database
     ├── config
+    ├── database
     ├── internal
     │   ├── controllers
     │   │   ├── brand_hotel
