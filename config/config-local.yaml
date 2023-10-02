@@ -4,10 +4,10 @@ server:
 
 database:
   host: "localhost"
-  port: 5432
+  port: 3306
   dbName: "arch_db"
-  username: "postgres"
-  password: "postgres"
+  username: "root"
+  password: "root"
 
 log:
   level: "debug" # trace | debug | info | warn | error | fatal | panic

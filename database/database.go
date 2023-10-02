@@ -18,15 +18,15 @@ func NewDB() *sql.DB {
 func newDb(dbName string) *sql.DB {
 	var dbConfig = config.Get().Database
 
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+"password=%s dbname=%s",
-		dbConfig.Host,
-		dbConfig.Port,
+	mysqlInfo := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s",
 		dbConfig.Username,
 		dbConfig.Password,
+		dbConfig.Host,
+		dbConfig.Port,
 		dbName,
 	)
 
-	db, err := sql.Open("postgres", psqlInfo)
+	db, err := sql.Open("mysql", mysqlInfo)
 	panicOnError(err)
 	if err = db.Ping(); err != nil {
 		logger.Fatal(context.TODO(), err)
