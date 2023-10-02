@@ -40,7 +40,7 @@ func Init(env string) {
 		env = "local"
 	}
 
-	viper.AddConfigPath("configs/")
+	viper.AddConfigPath("config/")
 	viper.SetConfigName("config-" + env)
 	viper.SetConfigType("yaml")
 

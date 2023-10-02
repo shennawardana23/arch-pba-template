@@ -1,29 +1,26 @@
-package database
+package database_test
 
 import (
 	"context"
 	"database/sql"
 	"fmt"
 	"log"
+	"testing"
 
 	_ "github.com/go-sql-driver/mysql"
 	config "github.com/mochammadshenna/arch-pba-template/config"
 	"github.com/mochammadshenna/arch-pba-template/internal/util/logger"
 )
 
-func NewDB() *sql.DB {
-	return newDb(config.Get().Database.DbName)
-}
-
-func newDb(dbName string) *sql.DB {
+func TestOpenConnection(t *testing.T) {
 	var dbConfig = config.Get().Database
 
-	mysqlInfo := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8",
+	mysqlInfo := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s",
 		dbConfig.Username,
 		dbConfig.Password,
 		dbConfig.Host,
 		dbConfig.Port,
-		dbName,
+		dbConfig.DbName,
 	)
 
 	db, err := sql.Open("mysql", mysqlInfo)
@@ -35,12 +32,7 @@ func newDb(dbName string) *sql.DB {
 		}
 	}
 
-	// db.SetMaxIdleConns(5)
-	// db.SetMaxOpenConns(20)
-	// db.SetConnMaxLifetime(60 * time.Minute)
-	// db.SetConnMaxIdleTime(10 * time.Minute)
-
-	return db
+	defer db.Close()
 }
 
 func panicOnError(err error) {

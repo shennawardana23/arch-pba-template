@@ -20,8 +20,8 @@ func Init() {
 
 	Logger.SetFormatter(
 		NewFormatter(
-			WithStackSkip("github.com/mochammadshenna/klinik-pintar-go/utils/logger"),
-			WithStackSkip("github.com/mochammadshenna/klinik-pintar-go/utils/helper"),
+			WithStackSkip("github.com/mochammadshenna/arch-pba-template/internal/util/logger"),
+			WithStackSkip("github.com/mochammadshenna/arch-pba-template/internal/util/helper"),
 		),
 	)
 

@@ -111,7 +111,7 @@ func action(f func(*dbmate.DB, *cli.Context) error) cli.ActionFunc {
 	dbConfig := config.Get().Database
 	return func(c *cli.Context) error {
 		link := fmt.Sprintf("%s://%s:%s@%s:%d/%s",
-			"postgres",
+			"mysql",
 			dbConfig.Username,
 			dbConfig.Password,
 			dbConfig.Host,
@@ -120,11 +120,7 @@ func action(f func(*dbmate.DB, *cli.Context) error) cli.ActionFunc {
 		)
 
 		u, err := url.Parse(link)
-		if err != nil {
-			log.Println(err)
-		} else {
-			log.Println(err)
-		}
+		panicOnError(err)
 
 		db := dbmate.New(u)
 		db.AutoDumpSchema = !c.Bool("no-dump-schema")
@@ -139,4 +135,11 @@ func redactLogString(in string) string {
 	re := regexp.MustCompile("([a-zA-Z]+://[^:]+:)[^@]+@")
 
 	return re.ReplaceAllString(in, "${1}********@")
+}
+
+func panicOnError(err error) {
+	if err != nil {
+		log.Printf("panic on config %v", err)
+		panic(err)
+	}
 }
