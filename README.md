@@ -47,7 +47,7 @@ Arguments:
 (required) -h: database host.
 (required) -u: database username.
 (optional) -p: database port. Default: 5432
-(optional) -d: database name. Default: pintarnya_kerja
+(optional) -d: database name. Default: arch_db
 (required) -a: dbmate action. [up|down|create|new|wait|migrate|status|dump|rollback]
 ```
 
@@ -62,9 +62,11 @@ Arguments:
 
 
 #### Architecture Layers of the Project 🔰 
-- Presentation Layer
+- REST Layer
 - Business Layer
 - Presistance Layer
+ 
+![Alt text](images/Architecture%20Layer.jpg)
 
 #### The Complete Project Folder Structure 📁 
 
@@ -169,3 +171,5 @@ Based on the product requirement we have cms admin which need to serve endpoint 
 #### TODO 🗒
 
 - Improvement based on feedback from Reviewing
+- Improve to Hexagonal Architecture
+![Alt text](images/Hexagonal%20Architecture.jpg)
