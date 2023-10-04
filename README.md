@@ -11,6 +11,7 @@
   - [API documentation of Monolithic Classification 📄](#api-documentation-of-monolithic-classification-)
   - [How to Define UseCase](#how-to-define-usecase)
   - [Arch PBA ERD 🔨](#arch-pba-erd-)
+  - [Arch PBA Tech Design 🔨](#arch-pba-tech-design-)
   - [TODO 🗒](#todo-)
 
 #### Quick start 🚀
@@ -59,6 +60,8 @@ Arguments:
 > # or
 > make run env=?
 > ```
+
+![Alt text](images/FlowDev.jpg)
 
 
 #### Architecture Layers of the Project 🔰 
@@ -165,11 +168,13 @@ Based on the product requirement we have cms admin which need to serve endpoint 
 
 
 #### Arch PBA ERD 🔨
-[*Arch PBA Entity Relationship Diagram*](https://dbdiagram.io)
+[*Arch PBA Entity Relationship Diagram*](https://dbdiagram.io/d/PBA-Template-651cdf87ffbf5169f0fbf4a3)
 
+
+#### Arch PBA Tech Design 🔨
+[*Tech Design*](https://docs.google.com/document/d/1R5GSpwRj9xLKzdYa4bwE81nu0x5mer5T/edit?usp=sharing&ouid=100809718456748840710&rtpof=true&sd=true)
 
 #### TODO 🗒
-
 - Improvement based on feedback from Reviewing
 - Improve to Hexagonal Architecture
 ![Alt text](images/Hexagonal%20Architecture.jpg)
