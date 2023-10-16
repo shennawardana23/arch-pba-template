@@ -2,15 +2,16 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/url"
 	"os"
 	"regexp"
 
-	"github.com/amacneil/dbmate/pkg/dbmate"
-	_ "github.com/go-sql-driver/mysql"
-	config "github.com/mochammadshenna/arch-pba-template/config"
+	"github.com/amacneil/dbmate/v2/pkg/dbmate"
+	"github.com/mochammadshenna/arch-pba-template/config"
 	"github.com/mochammadshenna/arch-pba-template/internal/state"
+	"github.com/mochammadshenna/arch-pba-template/internal/util/helper"
+
+	_ "github.com/amacneil/dbmate/v2/pkg/driver/mysql"
 	"github.com/urfave/cli/v2"
 )
 
@@ -110,7 +111,7 @@ func action(f func(*dbmate.DB, *cli.Context) error) cli.ActionFunc {
 	config.Init(state.App.Environment)
 	dbConfig := config.Get().Database
 	return func(c *cli.Context) error {
-		link := fmt.Sprintf("%s://%s:%s@%s:%d/%s",
+		link := fmt.Sprintf("%s://%s:%s@%s:%s/%s",
 			"mysql",
 			dbConfig.Username,
 			dbConfig.Password,
@@ -119,13 +120,15 @@ func action(f func(*dbmate.DB, *cli.Context) error) cli.ActionFunc {
 			dbConfig.DbName,
 		)
 
+		// link := "mysql://shenna:Aqilah@21@localhost:3306/arch_db"
+
 		u, err := url.Parse(link)
-		panicOnError(err)
+		helper.PanicError(err)
 
 		db := dbmate.New(u)
 		db.AutoDumpSchema = !c.Bool("no-dump-schema")
 		db.SchemaFile = c.String("schema-file")
-		db.MigrationsDir = "./scripts/migrations"
+		db.MigrationsDir = []string{"./scripts/migrations"}
 
 		return f(db, c)
 	}
@@ -135,11 +138,4 @@ func redactLogString(in string) string {
 	re := regexp.MustCompile("([a-zA-Z]+://[^:]+:)[^@]+@")
 
 	return re.ReplaceAllString(in, "${1}********@")
-}
-
-func panicOnError(err error) {
-	if err != nil {
-		log.Printf("panic on config %v", err)
-		panic(err)
-	}
 }
