@@ -21,7 +21,7 @@ type (
 
 	DatabaseConfig struct {
 		Host     string
-		Port     int
+		Port     string
 		DbName   string
 		Username string
 		Password string

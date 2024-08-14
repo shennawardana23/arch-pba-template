@@ -8,20 +8,23 @@ import (
 	"testing"
 
 	_ "github.com/go-sql-driver/mysql"
-	config "github.com/mochammadshenna/arch-pba-template/config"
 	"github.com/mochammadshenna/arch-pba-template/internal/util/logger"
 )
 
 func TestOpenConnection(t *testing.T) {
-	var dbConfig = config.Get().Database
+	// config.Init(state.App.Environment)
+	// var dbConfig = config.Get().Database
 
-	mysqlInfo := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s",
-		dbConfig.Username,
-		dbConfig.Password,
-		dbConfig.Host,
-		dbConfig.Port,
-		dbConfig.DbName,
-	)
+	// mysqlInfo := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+	// 	dbConfig.Username,
+	// 	dbConfig.Password,
+	// 	dbConfig.Host,
+	// 	dbConfig.Port,
+	// 	dbConfig.DbName,
+	// )
+
+	mysqlInfo := "shenna:Aqilah@21@tcp(localhost:3306)/arch_db"
+	fmt.Println(mysqlInfo)
 
 	db, err := sql.Open("mysql", mysqlInfo)
 	panicOnError(err)

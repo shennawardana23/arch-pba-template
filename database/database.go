@@ -18,13 +18,15 @@ func NewDB() *sql.DB {
 func newDb(dbName string) *sql.DB {
 	var dbConfig = config.Get().Database
 
-	mysqlInfo := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8",
+	mysqlInfo := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 		dbConfig.Username,
 		dbConfig.Password,
 		dbConfig.Host,
 		dbConfig.Port,
 		dbName,
 	)
+
+	// mysqlInfo := "shenna:Aqilah@21@tcp(localhost:3306)/arch_db"
 
 	db, err := sql.Open("mysql", mysqlInfo)
 	panicOnError(err)

@@ -4,10 +4,10 @@ server:
 
 database:
   host: "localhost"
-  port: 3306
+  port: "3306"
   dbName: "arch_db"
-  username: "root"
-  password: "root"
+  username: "shenna"
+  password: "Aqilah@21"
 
 log:
   level: "debug" # trace | debug | info | warn | error | fatal | panic
