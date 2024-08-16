@@ -1,0 +1,46 @@
+name: Static Analysis and Report
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install deps
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install libvips-dev
+
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          stable: 'false'
+          go-version: '1.20.0'
+
+      - name: Go Test
+        continue-on-error: true
+        run: |
+          go test -coverprofile=./coverage.out ./...
+          go tool cover -func=coverage.out
+
+      - name: Running Lint (go vet)
+        run: go vet -json ./... 2> vet.json
+
+      - name: GoLinter
+        run: |
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
+          golangci-lint run --out-format checkstyle -D deadcode,unused --build-tags=integration --timeout 10m --issues-exit-code 0 ./... > report.xml
+
+      - name: GoSec
+        run: |
+          go install github.com/securego/gosec/v2/cmd/gosec@latest
+          gosec -no-fail -fmt=sonarqube -out results.sarif ./...
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
