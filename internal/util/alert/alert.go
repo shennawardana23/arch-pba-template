@@ -16,14 +16,14 @@ func Error(ctx context.Context, err error, webhookUrl, alertName, payload string
 	version := ctx.Value(state.HttpHeaders().Version)
 
 	if platformType == nil || platformType == "" {
-		platformType = "unknown"
+		platformType = ""
 	}
 
 	if version == nil || version == "" {
-		version = "unknown"
+		version = ""
 	}
 
-	// requestIdMessage := "unknown"
+	// requestIdMessage := ""
 	// if requestId != nil && requestId != "" {
 	// 	requestIdMessage = fmt.Sprintf(requestIdTemplate, requestId)
 	// }
