@@ -31,7 +31,7 @@ jobs:
 
       - name: GoLinter
         run: |
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.60.1
           golangci-lint run --out-format checkstyle -D deadcode,unused --build-tags=integration --timeout 10m --issues-exit-code 0 ./... > report.xml
 
       - name: GoSec
