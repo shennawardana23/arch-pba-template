@@ -36,7 +36,7 @@ func Error(ctx context.Context, err error, webhookUrl, alertName, payload string
 		defer cancel()
 		defer func() {
 			if r := recover(); r != nil {
-				logger.Error(ctx, r)
+				// logger.Error(ctx, r)
 				return
 			}
 		}()
