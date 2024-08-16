@@ -30,8 +30,8 @@ jobs:
 
       - name: GoLinter
         run: |
-         go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
-         golangci-lint run --out-format checkstyle -D deadcode,unused --build-tags=integration --timeout 10m --issues-exit-code 0 ./... > report.xml
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
+          golangci-lint run --out-format checkstyle -D deadcode,unused --build-tags=integration --timeout 10m --issues-exit-code 0 ./... > report.xml
 
       - name: GoSec
         run: |
