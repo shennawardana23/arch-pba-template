@@ -5,6 +5,9 @@ import (
 	"context"
 	"net/http"
 	"time"
+
+	"github.com/mochammadshenna/arch-pba-template/internal/state"
+	"github.com/mochammadshenna/arch-pba-template/internal/util/logger"
 )
 
 func Error(ctx context.Context, err error, webhookUrl, alertName, payload string, additionalData []byte) {
