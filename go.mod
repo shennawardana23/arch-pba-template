@@ -1,6 +1,6 @@
 module github.com/mochammadshenna/arch-pba-template
 
-go 1.20
+go 1.21
 
 require (
 	github.com/amacneil/dbmate/v2 v2.6.0

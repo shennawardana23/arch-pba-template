@@ -14,11 +14,11 @@ jobs:
           sudo apt-get update
           sudo apt-get -y install libvips-dev
 
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
         with:
           stable: 'false'
-          go-version: '1.20.0'
+          go-version: '1.21.0'
 
       - name: Go Test
         continue-on-error: true
@@ -31,7 +31,7 @@ jobs:
 
       - name: GoLinter
         run: |
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.60.1
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
           golangci-lint run --out-format checkstyle -D deadcode,unused --build-tags=integration --timeout 10m --issues-exit-code 0 ./... > report.xml
 
       - name: GoSec
